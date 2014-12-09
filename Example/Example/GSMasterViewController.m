@@ -8,7 +8,6 @@
 
 #import "GSMasterViewController.h"
 
-#import "GSIndeterminateProgressView.h"
 
 @interface GSMasterViewController () {
     NSMutableArray *_objects;
@@ -40,6 +39,8 @@
     
     [progressView startAnimating];
     _progressView = progressView;
+    
+    [self.storyboardProgressView startAnimating];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,11 +52,13 @@
 - (IBAction)startAnimationgAction:(id)sender
 {
     [_progressView startAnimating];
+    [self.storyboardProgressView startAnimating];
 }
 
 - (IBAction)stopAnimationgAction:(id)sender
 {
     [_progressView stopAnimating];
+    [self.storyboardProgressView stopAnimating];
 }
 
 @end

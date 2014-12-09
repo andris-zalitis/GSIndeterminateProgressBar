@@ -19,15 +19,33 @@ const CGFloat CHUNK_WIDTH = 36.0f;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.clipsToBounds = YES;
-
-        self.trackTintColor = [UIColor whiteColor];
-        self.progressTintColor = [UIColor blueColor];
-
-        self.hidesWhenStopped = YES;
-        self.hidden = YES;
+        [self setUp];
     }
     return self;
+}
+
+/**
+ Use awakeFromNib instead of initWithCoder to access custom properties set in nib/storyboard
+ */
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setUp];
+}
+
+- (void)setUp {
+    self.clipsToBounds = YES;
+   
+    if (! self.trackTintColor) {
+        self.trackTintColor = [UIColor whiteColor];
+    }
+    if (! self.progressTintColor) {
+        self.progressTintColor = [UIColor blueColor];
+    }
+    
+    self.hidesWhenStopped = YES;
+    self.hidden = YES;
 }
 
 - (void)setTrackTintColor:(UIColor *)trackTintColor
@@ -59,7 +77,8 @@ const CGFloat CHUNK_WIDTH = 36.0f;
     [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
         v.backgroundColor = safeSelf.progressTintColor;
         [safeSelf addSubview:v];
-        [safeSelf animateProgressChunk:v delay:(delay += 0.35f)];
+        [safeSelf animateProgressChunk:v delay:delay];
+        delay += 0.35f;
     }];
 }
 
@@ -67,8 +86,6 @@ const CGFloat CHUNK_WIDTH = 36.0f;
 {
     if (!_isAnimating) return;
     _isAnimating = NO;
-
-    self.hidden = self.hidesWhenStopped;
 
     [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
         [UIView animateWithDuration:(.3f*idx)
@@ -80,6 +97,15 @@ const CGFloat CHUNK_WIDTH = 36.0f;
                              [v removeFromSuperview];
                          }];
     }];
+    
+    if (self.hidesWhenStopped) {
+        [UIView animateWithDuration:0.3f*[self.progressChunks count] animations:^{
+            self.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.hidden = YES;
+            self.alpha = 1;
+        }];
+    }
 
     self.progressChunks = nil;
 }

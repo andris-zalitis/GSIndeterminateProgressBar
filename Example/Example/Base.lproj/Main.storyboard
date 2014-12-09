@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -24,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-1" y="64"/>
         </scene>
-        <!--Master View Controller - Indeterminate-->
+        <!--Indeterminate-->
         <scene sceneID="oaX-gS-wEI">
             <objects>
                 <viewController id="nyo-xi-DGW" customClass="GSMasterViewController" sceneMemberID="viewController">
@@ -36,9 +37,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtg-2S-TGb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtg-2S-TGb">
                                 <rect key="frame" x="123" y="224" width="74" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="269-6Y-DgV"/>
+                                    <constraint firstAttribute="width" constant="74" id="QOK-FW-9IO"/>
+                                </constraints>
                                 <state key="normal" title="Start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -46,9 +50,8 @@
                                     <action selector="startAnimationgAction:" destination="nyo-xi-DGW" eventType="touchUpInside" id="KPd-c8-Cm6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfd-gd-4CK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfd-gd-4CK">
                                 <rect key="frame" x="123" y="312" width="74" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Stop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -56,10 +59,36 @@
                                     <action selector="stopAnimationgAction:" destination="nyo-xi-DGW" eventType="touchUpInside" id="8Fg-hO-Ri7"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRc-dI-fpj" customClass="GSIndeterminateProgressView">
+                                <rect key="frame" x="0.0" y="564" width="320" height="4"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="1G2-G4-hC1"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressTintColor">
+                                        <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Qtg-2S-TGb" secondAttribute="centerX" id="2tX-4U-Xbl"/>
+                            <constraint firstAttribute="trailing" secondItem="ZRc-dI-fpj" secondAttribute="trailing" id="E7Q-iH-Z5f"/>
+                            <constraint firstItem="ZRc-dI-fpj" firstAttribute="leading" secondItem="RGO-gg-Ps1" secondAttribute="leading" id="Hyw-wt-oJD"/>
+                            <constraint firstItem="mfd-gd-4CK" firstAttribute="height" secondItem="Qtg-2S-TGb" secondAttribute="height" id="Uqi-kS-bGd"/>
+                            <constraint firstAttribute="centerX" secondItem="mfd-gd-4CK" secondAttribute="centerX" id="XfS-lS-VD1"/>
+                            <constraint firstItem="Qtg-2S-TGb" firstAttribute="top" secondItem="SNV-hh-obY" secondAttribute="bottom" constant="160" id="jZ0-bk-TWp"/>
+                            <constraint firstItem="mfd-gd-4CK" firstAttribute="width" secondItem="Qtg-2S-TGb" secondAttribute="width" id="spX-qE-pv7"/>
+                            <constraint firstItem="mfd-gd-4CK" firstAttribute="top" secondItem="Qtg-2S-TGb" secondAttribute="bottom" constant="54" id="y3L-Kf-EyP"/>
+                            <constraint firstItem="cyR-IC-YBP" firstAttribute="top" secondItem="ZRc-dI-fpj" secondAttribute="bottom" id="yBB-37-6Ba"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Indeterminate" id="724-da-nXY"/>
+                    <connections>
+                        <outlet property="storyboardProgressView" destination="ZRc-dI-fpj" id="G4k-Ri-Saq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6iw-Rv-Yck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

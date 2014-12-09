@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GSIndeterminateProgressView.h"
+
 @interface GSMasterViewController : UIViewController
+
+@property (nonatomic, weak) IBOutlet GSIndeterminateProgressView *storyboardProgressView;
 
 - (IBAction)startAnimationgAction:(id)sender;
 
